@@ -1,123 +1,175 @@
-let gameState = 'start';
-let paddle_1 = document.querySelector('.paddle_1');
-let paddle_2 = document.querySelector('.paddle_2');
-let board = document.querySelector('.board');
-let initial_ball = document.querySelector('.ball');
-let ball = document.querySelector('.ball');
-let score_1 = document.querySelector('.player_1_score');
-let score_2 = document.querySelector('.player_2_score');
-let message = document.querySelector('.message');
-let paddle_1_coord = paddle_1.getBoundingClientRect();
-let paddle_2_coord = paddle_2.getBoundingClientRect();
-let initial_ball_coord = ball.getBoundingClientRect();
-let ball_coord = initial_ball_coord;
-let board_coord = board.getBoundingClientRect();
-let paddle_common =
-	document.querySelector('.paddle').getBoundingClientRect();
+function jogador1() {
+  let pedra = document.getElementById("pedra");
+  let papel = document.getElementById("papel");
+  let tesoura = document.getElementById("tesoura");
 
-let dx = Math.floor(Math.random() * 4) + 3;
-let dy = Math.floor(Math.random() * 4) + 3;
-let dxd = Math.floor(Math.random() * 2);
-let dyd = Math.floor(Math.random() * 2);
+  if (pedra.checked == 0 && papel.checked == 0 && tesoura.checked == 0) {
+    alert("Jogador 1, selecione uma opção");
+  }
+}
 
-document.addEventListener('keydown', (e) => {
-if (e.key == 'Enter') {
-	gameState = gameState == 'start' ? 'play' : 'start';
-	if (gameState == 'play') {
-	message.innerHTML = 'Game Started';
-	message.style.left = 42 + 'vw';
-	requestAnimationFrame(() => {
-		dx = Math.floor(Math.random() * 4) + 3;
-		dy = Math.floor(Math.random() * 4) + 3;
-		dxd = Math.floor(Math.random() * 2);
-		dyd = Math.floor(Math.random() * 2);
-		moveBall(dx, dy, dxd, dyd);
-	});
-	}
-}
-if (gameState == 'play') {
-	if (e.key == 'w') {
-	paddle_1.style.top =
-		Math.max(
-		board_coord.top,
-		paddle_1_coord.top - window.innerHeight * 0.06
-		) + 'px';
-	paddle_1_coord = paddle_1.getBoundingClientRect();
-	}
-	if (e.key == 's') {
-	paddle_1.style.top =
-		Math.min(
-		board_coord.bottom - paddle_common.height,
-		paddle_1_coord.top + window.innerHeight * 0.06
-		) + 'px';
-	paddle_1_coord = paddle_1.getBoundingClientRect();
-	}
+function printar() {
+  if (pedra.checked == 1) {
+    $(document).ready(function () {
+      $("#imageoption1").attr("src", "/img/duvida.png");
+      teste.innerHTML = "Opção selecionada";
+    });
+    // alert('pedra foi selecionada');
+  }
 
-	if (e.key == 'ArrowUp') {
-	paddle_2.style.top =
-		Math.max(
-		board_coord.top,
-		paddle_2_coord.top - window.innerHeight * 0.1
-		) + 'px';
-	paddle_2_coord = paddle_2.getBoundingClientRect();
-	}
-	if (e.key == 'ArrowDown') {
-	paddle_2.style.top =
-		Math.min(
-		board_coord.bottom - paddle_common.height,
-		paddle_2_coord.top + window.innerHeight * 0.1
-		) + 'px';
-	paddle_2_coord = paddle_2.getBoundingClientRect();
-	}
-}
-});
+  if (papel.checked == 1) {
+    $(document).ready(function () {
+      $("#imageoption1").attr("src", "/img/duvida.png");
+      teste.innerHTML = "Opção selecionada";
+    });
+    // alert('papel foi selecionada');
+  }
 
-function moveBall(dx, dy, dxd, dyd) {
-if (ball_coord.top <= board_coord.top) {
-	dyd = 1;
-}
-if (ball_coord.bottom >= board_coord.bottom) {
-	dyd = 0;
-}
-if (
-	ball_coord.left <= paddle_1_coord.right &&
-	ball_coord.top >= paddle_1_coord.top &&
-	ball_coord.bottom <= paddle_1_coord.bottom
-) {
-	dxd = 1;
-	dx = Math.floor(Math.random() * 4) + 3;
-	dy = Math.floor(Math.random() * 4) + 3;
-}
-if (
-	ball_coord.right >= paddle_2_coord.left &&
-	ball_coord.top >= paddle_2_coord.top &&
-	ball_coord.bottom <= paddle_2_coord.bottom
-) {
-	dxd = 0;
-	dx = Math.floor(Math.random() * 4) + 3;
-	dy = Math.floor(Math.random() * 4) + 3;
-}
-if (
-	ball_coord.left <= board_coord.left ||
-	ball_coord.right >= board_coord.right
-) {
-	if (ball_coord.left <= board_coord.left) {
-	score_2.innerHTML = +score_2.innerHTML + 1;
-	} else {
-	score_1.innerHTML = +score_1.innerHTML + 1;
-	}
-	gameState = 'start';
+  if (tesoura.checked == 1) {
+    $(document).ready(function () {
+      $("#imageoption1").attr("src", "/img/duvida.png");
 
-	ball_coord = initial_ball_coord;
-	ball.style = initial_ball.style;
-	message.innerHTML = 'Press Enter to Play Pong';
-	message.style.left = 38 + 'vw';
-	return;
+      teste.innerHTML = "Opção selecionada";
+    });
+    // alert('tesoura foi selecionada');
+  }
 }
-ball.style.top = ball_coord.top + dy * (dyd == 0 ? -1 : 1) + 'px';
-ball.style.left = ball_coord.left + dx * (dxd == 0 ? -1 : 1) + 'px';
-ball_coord = ball.getBoundingClientRect();
-requestAnimationFrame(() => {
-	moveBall(dx, dy, dxd, dyd);
-});
+
+function jogador2() {
+  let pedra2 = document.getElementById("pedra2");
+  let papel2 = document.getElementById("papel2");
+  let tesoura2 = document.getElementById("tesoura2");
+
+  if (pedra2.checked == 0 && papel2.checked == 0 && tesoura2.checked == 0) {
+    alert("Jogador 2, selecione uma opção");
+  }
+}
+
+function printar2() {
+  if (pedra2.checked == 1) {
+    $(document).ready(function () {
+      $("#imageoption2").attr("src", "/img/duvida.png");
+      teste2.innerHTML = "Opção selecionada";
+    });
+    // alert('pedra foi selecionada');
+  }
+
+  if (papel2.checked == 1) {
+    $(document).ready(function () {
+      $("#imageoption2").attr("src", "/img/duvida.png");
+      teste2.innerHTML = "Opção selecionada";
+    });
+    // alert('papel foi selecionada');
+  }
+
+  if (tesoura2.checked == 1) {
+    $(document).ready(function () {
+      $("#imageoption2").attr("src", "/img/duvida.png");
+
+      teste2.innerHTML = "Opção selecionada";
+    });
+    // alert('tesoura foi selecionada');
+  }
+}
+
+// Funções do index.html
+function jogar1() {
+  window.location.href = "game.html";
+}
+function jogar2() {
+  window.location.href = "game2.html";
+}
+
+function limpar() {
+  teste.innerHTML = "";
+  $(document).ready(function () {
+    $("#imageoption").attr("src", "");
+
+    teste.innerHTML = "";
+  });
+}
+
+function limpar2() {
+  teste2.innerHTML = "";
+  $(document).ready(function () {
+    $("#imageoption").attr("src", "");
+
+    teste2.innerHTML = "";
+  });
+}
+
+function verificar() {
+  if (pedra.checked == true && pedra2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "Os dois escolheram pedra, houve um Empate";
+    });
+  }
+  if (papel.checked == true && papel2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "Os dois escolheram papel, houve um Empate";
+    });
+  }
+  if (tesoura.checked == true && tesoura2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "Os dois escolheram tesoura, houve um Empate";
+    });
+  }
+
+  if (tesoura.checked == true && pedra2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "jogador1 escolheu tesoura e jogador2 escolheu pedra: JOGADOR 2 VENCEU ";
+    });
+  }
+  if (tesoura.checked == true && papel2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "jogador1 escolheu tesoura e jogador2 escolheu papel: JOGADOR 1 VENCEU ";
+    });
+  }
+  if (papel.checked == true && tesoura2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "jogador1 escolheu papel e jogador2 escolheu tesoura: JOGADOR 2 VENCEU ";
+    });
+  }
+  if (papel.checked == true && pedra2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "jogador1 escolheu papel e jogador2 escolheu pedra: JOGADOR 1 VENCEU ";
+    });
+  }
+  if (pedra.checked == true && tesoura2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "jogador1 escolheu pedra e jogador2 escolheu tesoura: JOGADOR 1 VENCEU ";
+    });
+  }
+  if (pedra.checked == true && papel2.checked == true) {
+    resultado.innerHTML = "";
+    $(document).ready(function () {
+      $("#imageoption").attr("src", "");
+
+      resultado.innerHTML = "jogador1 escolheu pedra e jogador2 escolheu papel: JOGADOR 2 VENCEU ";
+    });
+  }
 }
